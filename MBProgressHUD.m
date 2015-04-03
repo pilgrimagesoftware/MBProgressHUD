@@ -622,7 +622,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		//Gradient center
 		CGPoint gradCenter= CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
 		//Gradient radius
-		float gradRadius = MIN(self.bounds.size.width , self.bounds.size.height) ;
+		float gradRadius = (float)MIN(self.bounds.size.width , self.bounds.size.height) ;
 		//Gradient draw
 		CGContextDrawRadialGradient (context, gradient, gradCenter,
 									 0, gradCenter, gradRadius,
@@ -921,7 +921,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	CGContextSetFillColorWithColor(context, [_progressRemainingColor CGColor]);
 	
 	// Draw background
-	float radius = (rect.size.height / 2) - 2;
+	float radius = (float)(rect.size.height / 2) - 2;
 	CGContextMoveToPoint(context, 2, rect.size.height/2);
 	CGContextAddArcToPoint(context, 2, 2, radius + 2, 2, radius);
 	CGContextAddLineToPoint(context, rect.size.width - radius - 2, 2);
@@ -943,7 +943,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	
 	CGContextSetFillColorWithColor(context, [_progressColor CGColor]);
 	radius = radius - 2;
-	float amount = self.progress * rect.size.width;
+	float amount = (float)(self.progress * rect.size.width);
 	
 	// Progress in the middle area
 	if (amount >= radius + 4 && amount <= (rect.size.width - radius - 4)) {
@@ -962,12 +962,12 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	
 	// Progress in the right arc
 	else if (amount > radius + 4) {
-		float x = amount - (rect.size.width - radius - 4);
+		float x = amount - (float)(rect.size.width - radius - 4);
 
 		CGContextMoveToPoint(context, 4, rect.size.height/2);
 		CGContextAddArcToPoint(context, 4, 4, radius + 4, 4, radius);
 		CGContextAddLineToPoint(context, rect.size.width - radius - 4, 4);
-		float angle = -acos(x/radius);
+		float angle = -acosf(x/radius);
 		if (isnan(angle)) angle = 0;
 		CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, M_PI, angle, 0);
 		CGContextAddLineToPoint(context, amount, rect.size.height/2);
@@ -975,7 +975,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		CGContextMoveToPoint(context, 4, rect.size.height/2);
 		CGContextAddArcToPoint(context, 4, rect.size.height - 4, radius + 4, rect.size.height - 4, radius);
 		CGContextAddLineToPoint(context, rect.size.width - radius - 4, rect.size.height - 4);
-		angle = acos(x/radius);
+		angle = acosf(x/radius);
 		if (isnan(angle)) angle = 0;
 		CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, -M_PI, angle, 1);
 		CGContextAddLineToPoint(context, amount, rect.size.height/2);
