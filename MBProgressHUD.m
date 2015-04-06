@@ -558,10 +558,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	totalSize.height += 2 * margin;
 	
 	// Position elements
-	CGFloat yPos = round(((bounds.size.height - totalSize.height) / 2)) + margin + yOffset;
+	CGFloat yPos = roundf(((float)(bounds.size.height - totalSize.height) / 2)) + margin + yOffset;
 	CGFloat xPos = xOffset;
 	indicatorF.origin.y = yPos;
-	indicatorF.origin.x = round((bounds.size.width - indicatorF.size.width) / 2) + xPos;
+	indicatorF.origin.x = roundf((float)(bounds.size.width - indicatorF.size.width) / 2) + xPos;
 	indicator.frame = indicatorF;
 	yPos += indicatorF.size.height;
 	
@@ -570,7 +570,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	}
 	CGRect labelF;
 	labelF.origin.y = yPos;
-	labelF.origin.x = round((bounds.size.width - labelSize.width) / 2) + xPos;
+	labelF.origin.x = roundf((float)(bounds.size.width - labelSize.width) / 2) + xPos;
 	labelF.size = labelSize;
 	label.frame = labelF;
 	yPos += labelF.size.height;
@@ -580,7 +580,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	}
 	CGRect detailsLabelF;
 	detailsLabelF.origin.y = yPos;
-	detailsLabelF.origin.x = round((bounds.size.width - detailsLabelSize.width) / 2) + xPos;
+	detailsLabelF.origin.x = roundf((float)(bounds.size.width - detailsLabelSize.width) / 2) + xPos;
 	detailsLabelF.size = detailsLabelSize;
 	detailsLabel.frame = detailsLabelF;
 	
@@ -641,8 +641,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	// Center HUD
 	CGRect allRect = self.bounds;
 	// Draw rounded HUD backgroud rect
-	CGRect boxRect = CGRectMake(round((allRect.size.width - size.width) / 2) + self.xOffset,
-								round((allRect.size.height - size.height) / 2) + self.yOffset, size.width, size.height);
+	CGRect boxRect = CGRectMake(roundf((float)(allRect.size.width - size.width) / 2) + self.xOffset,
+								roundf((float)(allRect.size.height - size.height) / 2) + self.yOffset, size.width, size.height);
 	float radius = self.cornerRadius;
 	CGContextBeginPath(context);
 	CGContextMoveToPoint(context, CGRectGetMinX(boxRect) + radius, CGRectGetMinY(boxRect));
@@ -969,7 +969,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		CGContextAddLineToPoint(context, rect.size.width - radius - 4, 4);
 		float angle = -acosf(x/radius);
 		if (isnan(angle)) angle = 0;
-		CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, M_PI, angle, 0);
+		CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, (float)M_PI, angle, 0);
 		CGContextAddLineToPoint(context, amount, rect.size.height/2);
 
 		CGContextMoveToPoint(context, 4, rect.size.height/2);
@@ -977,7 +977,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		CGContextAddLineToPoint(context, rect.size.width - radius - 4, rect.size.height - 4);
 		angle = acosf(x/radius);
 		if (isnan(angle)) angle = 0;
-		CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, -M_PI, angle, 1);
+		CGContextAddArc(context, rect.size.width - radius - 4, rect.size.height/2, radius, (float)-M_PI, angle, 1);
 		CGContextAddLineToPoint(context, amount, rect.size.height/2);
 		
 		CGContextFillPath(context);
